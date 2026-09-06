@@ -1,0 +1,24 @@
+{
+  "name": "ai-agent-playground",
+  "version": "1.0.0",
+  "description": "Incremental curriculum for learning AI Agent Engineering with Node.js + TypeScript.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "level0": "tsx level-00-foundation/src/index.ts",
+    "level0:stream": "tsx level-00-foundation/src/streaming.ts",
+    "level0:structured": "tsx level-00-foundation/src/structured-output.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}
