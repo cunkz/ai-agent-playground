@@ -8,9 +8,10 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "rootDir": "level-00-foundation/src",
-    "outDir": "dist",
     "types": ["node"]
   },
-  "include": ["level-00-foundation/src/**/*.ts"]
+  "include": [
+    "level-00-foundation/src/**/*.ts",
+    "level-01-single-agent/src/**/*.ts"
+  ]
 }

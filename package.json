@@ -8,13 +8,16 @@
     "level0": "tsx level-00-foundation/src/index.ts",
     "level0:stream": "tsx level-00-foundation/src/streaming.ts",
     "level0:structured": "tsx level-00-foundation/src/structured-output.ts",
+    "level1": "tsx level-01-single-agent/src/index.ts",
+    "level1:test-tools": "tsx level-01-single-agent/src/manual-tests.ts",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^17.4.2"
+    "dotenv": "^17.4.2",
+    "zod": "^4.5.4"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",
