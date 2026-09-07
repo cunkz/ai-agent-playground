@@ -11,7 +11,7 @@ Primary stack: **Node.js + TypeScript**.
 
 - [x] [Level 0 — LLM Fundamentals](./level-00-foundation/README.md)
 - [x] [Level 1 — Single Tool-Using Agent](./level-01-single-agent/README.md)
-- [ ] Level 2 — Memory + RAG
+- [x] [Level 2 — Memory + RAG](./level-02-memory/README.md)
 - [ ] Level 3 — Multi-Agent System
 - [ ] Level 4 — Scheduler + Autonomous Tasks
 - [ ] Level 5 — MCP

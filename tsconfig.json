@@ -12,6 +12,7 @@
   },
   "include": [
     "level-00-foundation/src/**/*.ts",
-    "level-01-single-agent/src/**/*.ts"
+    "level-01-single-agent/src/**/*.ts",
+    "level-02-memory/src/**/*.ts"
   ]
 }

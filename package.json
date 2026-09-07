@@ -10,6 +10,13 @@
     "level0:structured": "tsx level-00-foundation/src/structured-output.ts",
     "level1": "tsx level-01-single-agent/src/index.ts",
     "level1:test-tools": "tsx level-01-single-agent/src/manual-tests.ts",
+    "level2": "tsx level-02-memory/src/index.ts",
+    "level2:test-memory": "tsx level-02-memory/src/manual-tests.ts",
+    "level2:experiment-search": "tsx level-02-memory/src/experiments/semantic-search.ts",
+    "level2:ingest": "tsx level-02-memory/src/rag/run-ingestion.ts",
+    "level2:rag": "tsx level-02-memory/src/rag-query.ts",
+    "level2:experiment-chunking": "tsx level-02-memory/src/experiments/chunking.ts",
+    "level2:experiment-grounding": "tsx level-02-memory/src/experiments/grounding.ts",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
@@ -17,10 +24,12 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^17.4.2",
+    "pg": "^8.23.0",
     "zod": "^4.5.4"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",
+    "@types/pg": "^8.23.1",
     "tsx": "^4.23.13",
     "typescript": "^7.0.2"
   }

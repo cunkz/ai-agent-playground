@@ -1,0 +1,33 @@
+-- Migration: 004_create_vector_index
+-- Purpose: Originally intended to index memories.embedding for approximate
+--          nearest-neighbor search (Level 2, Phase E). Superseded by the
+--          decision documented below — this migration is now a no-op, kept
+--          in the sequence as a record of that decision rather than
+--          silently deleted.
+--
+-- ============================================================================
+-- DECISION: no ANN index is created. Semantic search uses exact
+-- (sequential-scan) cosine distance instead: `ORDER BY embedding <=>
+-- query_embedding LIMIT k`.
+--
+-- Why: pgvector's ANN index types have hard dimension caps —
+--   vector   + ivfflat/hnsw: max 2000 dimensions
+--   halfvec  + ivfflat/hnsw: max 4000 dimensions (half-precision workaround)
+-- This project's embedding model (EMBEDDING_MODEL=Qwen3-Embedding-8B,
+-- confirmed in migration 003) outputs 4096 dimensions — over both caps.
+-- Attempting `CREATE INDEX ... USING ivfflat (embedding vector_cosine_ops)`
+-- fails with: "column cannot have more than 2000 dimensions for ivfflat
+-- index" (confirmed against pgvector 0.8.6, verified via `SELECT
+-- extversion FROM pg_extension WHERE extname = 'vector'`).
+--
+-- This is an accepted, explained limitation, not an oversight: exact
+-- search is always correct (no approximation error an ANN index would
+-- introduce) and its full-table-scan cost is negligible at the row counts
+-- a personal/learning memory store will ever reach. Reconsider only if
+-- this table grows into the tens/hundreds of thousands of rows, at which
+-- point switching to a lower-dimensional embedding model (≤2000, or
+-- ≤4000 with halfvec) would be the more direct fix, not a workaround like
+-- dimensionality reduction bolted onto this schema.
+-- ============================================================================
+
+SELECT 1; -- intentional no-op; see decision above
