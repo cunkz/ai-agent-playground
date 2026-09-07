@@ -144,6 +144,13 @@ at two thresholds):
 npm run level2:experiment-grounding
 ```
 
+**7. Token-usage experiment** (Full Context vs. Memory+Retrieval vs. Poor
+Retrieval — 21 real LLM calls, see the dedicated section below):
+
+```bash
+npm run experiment:token-usage
+```
+
 Fastest "does everything still work" check:
 `npm run typecheck && npm run level2:test-memory`
 
@@ -416,6 +423,40 @@ own reasoning, not by any conflict-detection code that was written.
 (The MariaDB test fact was deleted after this demonstration, at the
 tester's request — a `DELETE` on data, not a schema change, so it didn't
 require the migration-approval workflow.)
+
+## Experiment: Full Context vs. Memory + Retrieval vs. Poor Retrieval (Token Usage)
+
+A separate, self-contained experiment measuring whether targeted memory
+retrieval actually reduces LLM input tokens compared to sending all
+context, and whether that comes at a quality cost. Full write-up:
+[`experiments/results/token-usage-report.md`](./experiments/results/token-usage-report.md)
+(raw trial data: `experiments/results/token-usage-results.json`).
+
+Run it: `npm run experiment:token-usage` (21 real LLM calls: 5 trials ×
+3 modes + a top-K sweep — real time and token cost).
+
+**Headline result**: ~29% input-token reduction from targeted retrieval
+vs. full context, measured twice independently. But the more interesting
+finding was unplanned — across all three modes, the model almost never
+produced actual code, choosing instead to ask clarifying questions,
+because prose descriptions of conventions aren't the same as seeing real
+source (directly validating this project's own memory-vs-repository
+distinction, §18 of the experiment brief). On the one axis that *was*
+gradable — whether a response demonstrated awareness of the correct
+project conventions — targeted retrieval **outperformed** full context: a
+real, observed instance of "lost in the middle" (Full Context had every
+correct fact available and cited none of them explicitly; Memory+
+Retrieval, with 1/5th the context, explicitly cited the correct ADR).
+Poor Retrieval was also the *cheapest* mode by token count — proof that
+token cost alone cannot signal retrieval quality.
+
+Two real methodology issues were found and handled, not swept aside: the
+gateway silently caches identical requests (fixed with a per-trial random
+marker to force genuine independent generations), and Level 1's
+`max_tokens: 1024` cap truncated 5/21 trials — concentrated specifically
+in the modes given the most context, making the reported total-token
+reduction conservative rather than inflated. Full details, including why
+each decision was made, are in the report itself.
 
 ## Failure Cases Tested
 

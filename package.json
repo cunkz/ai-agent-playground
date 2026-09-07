@@ -17,6 +17,7 @@
     "level2:rag": "tsx level-02-memory/src/rag-query.ts",
     "level2:experiment-chunking": "tsx level-02-memory/src/experiments/chunking.ts",
     "level2:experiment-grounding": "tsx level-02-memory/src/experiments/grounding.ts",
+    "experiment:token-usage": "tsx level-02-memory/src/experiments/token-usage/runner.ts",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
